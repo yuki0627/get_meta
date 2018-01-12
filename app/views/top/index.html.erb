@@ -1,0 +1,10 @@
+<%= form_tag 'top/create', method: :post do %>
+  <div class="form-group">
+    <label for="url_list" class="control-label">URL</label>
+    <%= text_area_tag 'url_list','', class: 'form-control' %>
+  </div>
+  <div class="text-right">
+    <%= submit_tag 'Go', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+<%= link_to "DL", top_download_path(file_path: @file_path), target: :_blank %>
