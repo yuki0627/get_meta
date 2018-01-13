@@ -56,6 +56,7 @@ class TopController < ApplicationController
       title = e.to_s
       description = ""
     rescue => e
+      Rails.logger.error(e.backtrace)
       title = 'error'
       description = 'error'
     end
