@@ -17,7 +17,7 @@ class TopController < ApplicationController
       results << get_meta(line.chomp)
     end
 
-    file_name = "./public/output/#{SecureRandom.hex(12)}.csv"
+    file_name = "/tmp/#{SecureRandom.hex(12)}.csv"
     csv_data = CSV.open(file_name, "wb") do |csv|
       csv_column_names = ["URL","TITLE","DESCRIPTION"]
       csv << csv_column_names
