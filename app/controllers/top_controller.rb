@@ -41,8 +41,9 @@ class TopController < ApplicationController
   end
   private
   def get_meta(url)
-    Rails.logger.info("■■■■■■■■■■start■■■■■■■■■■■")
+    Rails.logger.info("■■■■■■■■■■before■■■■■■■■■■■")
     Rails.logger.info(url)
+    Rails.logger.info("■■■■■■■■■■start■■■■■■■■■■■")
     # agent = Mechanize.new
     title = nil
     description = nil
