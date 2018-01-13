@@ -9,10 +9,6 @@ group :development do
   gem 'sqlite3'
 end
 
-group :production do
-  gem 'pg', '0.15.1'
-end
-
 gem 'rails', '~> 5.1.4'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
@@ -24,6 +20,7 @@ gem 'nokogiri'
 gem 'mechanize'
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'jquery-rails'
+gem 'pg'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
