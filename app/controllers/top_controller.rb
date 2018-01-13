@@ -56,7 +56,6 @@ class TopController < ApplicationController
       title = e.to_s
       description = ""
     rescue => e
-      binding.pry
       title = 'error'
       description = 'error'
     end
