@@ -16,7 +16,7 @@ gem 'nokogiri'
 gem 'mechanize'
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'jquery-rails'
-gem 'pg'
+gem 'pg', '~> 0.18'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
