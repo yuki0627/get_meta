@@ -41,22 +41,22 @@ class TopController < ApplicationController
   end
   private
   def get_meta(url)
-    agent = Mechanize.new
+    # agent = Mechanize.new
     title = nil
     description = nil
     begin
-      page = agent.get(url)
-      title = page.title
-      head = page.at("head meta[name='description']")
-      description = head["content"] if head.present?
-      title = title.encode("UTF-8",:invalid => :replace) if title.present?
-      description = description.encode("UTF-8",:invalid => :replace) if description.present?
+      html = open(url, "r:binary").read
+      doc = Nokogiri::HTML(html.toutf8, nil, 'utf-8')
+      # doc = Nokogiri::HTML(open(url), nil, 'CP932')
+      title = doc.title
+      description = doc.xpath('/html/head/meta[@name="description"]/@content').to_s
     rescue Mechanize::ResponseCodeError => e
       # puts e.page.body
       title = e.to_s
       description = ""
     rescue => e
-      Rails.logger.error(e.backtrace.join('\n'))
+      binding.pry
+      Rails.logger.error(e.backtrace)
       title = 'error'
       description = 'error'
     end
