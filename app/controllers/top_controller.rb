@@ -18,7 +18,7 @@ class TopController < ApplicationController
     end
 
     file_name = "/tmp/#{SecureRandom.hex(12)}.csv"
-    csv_data = CSV.open(file_name, "wb") do |csv|
+    csv_data = CSV.open(file_name, "wb", encoding: 'Shift_JIS:UTF-8') do |csv|
       csv_column_names = ["URL","TITLE","DESCRIPTION"]
       csv << csv_column_names
       results.each do | result |
@@ -53,13 +53,16 @@ class TopController < ApplicationController
       # puts e.page.body
       title = e.to_s
       description = ""
+    rescue ex
+      title = 'error'
+      description = 'error'
     end
     {url: url, title: title, description: description}
   end
 
   def read_csv(file_path)
     results = []
-    CSV.foreach(file_path, headers: true) do |data|
+    CSV.foreach(file_path, headers: true, encoding: 'Shift_JIS:UTF-8') do |data|
       results << {url: data['URL'], title: data['TITLE'], description: data['DESCRIPTION']}
     end
     results
