@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap";
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+table td {
+    /*word-break: break-all;*/
+    overflow-wrap: break-word;
+}
