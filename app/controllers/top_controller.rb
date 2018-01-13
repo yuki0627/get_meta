@@ -1,4 +1,5 @@
 class TopController < ApplicationController
+  http_basic_authenticate_with name: "mkwk", password: "mkwk", except: :hoge
   require 'open-uri'
   require 'nokogiri'
   require 'kconv'
