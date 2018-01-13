@@ -18,7 +18,7 @@ class TopController < ApplicationController
     end
 
     file_name = "/tmp/#{SecureRandom.hex(12)}.csv"
-    csv_data = CSV.open(file_name, "wb", encoding: 'Shift_JIS:UTF-8') do |csv|
+    csv_data = CSV.open(file_name, "wb") do |csv|
       csv_column_names = ["URL","TITLE","DESCRIPTION"]
       csv << csv_column_names
       results.each do | result |
@@ -49,11 +49,14 @@ class TopController < ApplicationController
       title = page.title
       head = page.at("head meta[name='description']")
       description = head["content"] if head.present?
+      title = title.encode("UTF-8",:invalid => :replace) if title.present?
+      description = description.encode("UTF-8",:invalid => :replace) if description.present?
     rescue Mechanize::ResponseCodeError => e
       # puts e.page.body
       title = e.to_s
       description = ""
-    rescue ex
+    rescue => e
+      binding.pry
       title = 'error'
       description = 'error'
     end
@@ -62,7 +65,7 @@ class TopController < ApplicationController
 
   def read_csv(file_path)
     results = []
-    CSV.foreach(file_path, headers: true, encoding: 'Shift_JIS:UTF-8') do |data|
+    CSV.foreach(file_path, headers: true) do |data|
       results << {url: data['URL'], title: data['TITLE'], description: data['DESCRIPTION']}
     end
     results
