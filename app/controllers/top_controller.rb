@@ -55,7 +55,6 @@ class TopController < ApplicationController
       title = e.to_s
       description = ""
     rescue => e
-      binding.pry
       Rails.logger.error(e.backtrace)
       title = 'error'
       description = 'error'
